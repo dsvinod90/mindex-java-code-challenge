@@ -4,8 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,7 +29,6 @@ public class CompensationServiceImplTest {
     private String createUrl;
     private Employee testEmployee;
     private Employee testEmployeeOne;
-    private Date date;
     private Compensation testCompensationOne;
 
     @Autowired
@@ -68,14 +65,6 @@ public class CompensationServiceImplTest {
         Compensation responseCompensation = (Compensation)res.getBody();
         assertNotNull(responseCompensation);
         assertEquals(testCompensation, responseCompensation);
-        // assertEquals(
-        //     testEmployee.getEmployeeId(),
-        //     responseCompensation.getEmployee().getEmployeeId()
-        // );
-        // assertEquals(
-        //     testCompensation.getSalary(),
-        //     responseCompensation.getSalary()
-        // );
     }
 
     // Test for read endpoint
@@ -101,5 +90,16 @@ public class CompensationServiceImplTest {
             testCompensationOne.getSalary(),
             responseCompensation.getSalary()
         );
+    }
+
+    // Test to check 404 response when employee is not found
+    @Test
+    public void testNegativeScenario() {
+        ResponseEntity res = restTemplate.getForEntity(
+            readUrl, 
+            Compensation.class, 
+            "foobar123"
+        );
+        assertEquals(HttpStatus.NOT_FOUND, res.getStatusCode());
     }
 }

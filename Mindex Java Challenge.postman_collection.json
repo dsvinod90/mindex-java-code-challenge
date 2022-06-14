@@ -1,0 +1,78 @@
+{
+	"info": {
+		"_postman_id": "63a81485-13d3-475d-b079-58be1df59406",
+		"name": "Mindex Java Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9717107"
+	},
+	"item": [
+		{
+			"name": "Fetch reporting structure",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/reportingStructure/16a596ae-edd3-4847-99fe-c4518e82c86f",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"reportingStructure",
+						"16a596ae-edd3-4847-99fe-c4518e82c86f"
+					]
+				},
+				"description": "API to fetch the reporting structure for a specific employee."
+			},
+			"response": []
+		},
+		{
+			"name": "Create compensation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"employee\" : {\n        \"employeeId\" : \"16a596ae-edd3-4847-99fe-c4518e82c86f\",\n        \"firstName\" : \"John\",\n        \"lastName\" : \"Lennon\",\n        \"position\" : \"Development Manager\",\n        \"department\" : \"Engineering\",\n        \"directReports\" : [\n            {\n                \"employeeId\" : \"b7839309-3348-463b-a7e3-5de1c168beb3\"\n            },\n            {\n                \"employeeId\": \"03aa1462-ffa9-4978-901b-7c001562cf6f\"\n            }\n        ]\n    },\n    \"salary\" : 10000,\n    \"effectiveDate\" : \"2022-10-10\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/compensation",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"compensation"
+					]
+				},
+				"description": "API endpoint to create compensation for a specific employee."
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch compensation",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/compensation/16a596ae-edd3-4847-99fe-c4518e82c86f",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"compensation",
+						"16a596ae-edd3-4847-99fe-c4518e82c86f"
+					]
+				},
+				"description": "API endpoint to fetch compensation for a specific employee"
+			},
+			"response": []
+		}
+	]
+}

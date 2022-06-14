@@ -103,4 +103,15 @@ public class ReportingStructureServiceImplTest {
         assertNotNull(reportingStructure);
         assertEquals(testReportingStructure, reportingStructure);
     }
+
+    // Test to check 404 response when employee is not found
+    @Test
+    public void testNegativeScenario() {
+        ResponseEntity res = restTemplate.getForEntity(
+            readUrl, 
+            ReportingStructure.class, 
+            "foobar123"
+        );
+        assertEquals(HttpStatus.NOT_FOUND, res.getStatusCode());
+    }
 }
