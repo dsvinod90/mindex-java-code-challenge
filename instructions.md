@@ -11,6 +11,8 @@ This is a new class added to the code repository. As mentioned in the README.md 
 `GET /reportingStructure/{employeeId}`:
 It returns the ReportingStructure object for the specified employeeId. This is calculated by recursively going through all the direct reports of the mentioned employee and aggregating the sum.
 
+*Assumption: Consider Employee A has 4 direct reports including Employee B and Employee B has 2 direct reports. If Employee C has both Employee A and Employee B as direct reports, then the total number of reportees for Employee C will be calculated to be 8.*
+
 ## TASK 2
 ### Compensation
 This is a new class added to the code repository as mentioned in the README.md file. This is mapped to the MongoDB repository and is persisted.
