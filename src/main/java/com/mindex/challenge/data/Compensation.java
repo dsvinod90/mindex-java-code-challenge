@@ -1,7 +1,11 @@
 package com.mindex.challenge.data;
 
+import java.util.Date;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Document
 public class Compensation {
@@ -11,9 +15,11 @@ public class Compensation {
     
     private Employee employee;
     private int salary;
-    private String effectiveDate;
 
-    public Compensation(Employee employee, int salary, String effectiveDate) {
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private Date effectiveDate;
+
+    public Compensation(Employee employee, int salary, Date effectiveDate) {
         this.employee = employee;
         this.salary = salary;
         this.effectiveDate = effectiveDate;
@@ -39,11 +45,11 @@ public class Compensation {
         this.salary = salary;
     }
 
-    public String getEffectiveDate() {
+    public Date getEffectiveDate() {
         return this.effectiveDate;
     }
 
-    public void setEffectiveDate(String effectiveDate) {
+    public void setEffectiveDate(Date effectiveDate) {
         this.effectiveDate = effectiveDate;
     }
 

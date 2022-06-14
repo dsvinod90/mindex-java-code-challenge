@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.mindex.challenge.dao.EmployeeRepository;
 import com.mindex.challenge.data.Employee;
 import com.mindex.challenge.data.ReportingStructure;
+import com.mindex.challenge.service.EmployeeService;
 import com.mindex.challenge.service.ReportingStructureService;
 
 @Service
@@ -17,12 +18,12 @@ public class ReportingStructureServiceImpl implements ReportingStructureService 
     private static final Logger LOG = LoggerFactory.getLogger(ReportingStructureServiceImpl.class);
 
     @Autowired
-    private EmployeeRepository employeeRepository;
+    private EmployeeService employeeService;
 
     @Override
     public ReportingStructure read(String employeeId) {
         LOG.debug("Fetching reporting structure for employee [{}]", employeeId);
-        Employee employee = employeeRepository.findByEmployeeId(employeeId);
+        Employee employee = employeeService.read(employeeId);
 
         if (employee == null) {
             throw new RuntimeException("Invalid employeeId: " + employeeId);
@@ -33,7 +34,7 @@ public class ReportingStructureServiceImpl implements ReportingStructureService 
 
     private int getTotalReportees(String employeeId) {
         int count = 0;
-        Employee employee = employeeRepository.findByEmployeeId(employeeId);
+        Employee employee = employeeService.read(employeeId);
 
         List<Employee> reportees = employee.getDirectReports();
         if (reportees != null) {
