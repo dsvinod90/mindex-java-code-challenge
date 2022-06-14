@@ -2,6 +2,8 @@
 ---
 The coding challenge has been completed as per the requirements mentioned in the **README.md** file.
 
+*Please Note: I had to upgrade gradle to version 7.4.2 to be compatible with my Java version.*
+
 ## API Contract:
 ***Command to start the application: `./gradlew bootRun`***
 ## TASK 1
