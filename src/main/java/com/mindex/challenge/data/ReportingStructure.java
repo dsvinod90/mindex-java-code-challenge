@@ -1,5 +1,7 @@
 package com.mindex.challenge.data;
 
+import java.util.Objects;
+
 public class ReportingStructure {
     
     private Employee employee;
@@ -24,5 +26,16 @@ public class ReportingStructure {
 
     public void setNoOfReports(int noOfReports) {
         this.noOfReports = noOfReports;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) return true;
+        if (!(obj instanceof ReportingStructure)) return false;
+        ReportingStructure reportingStructure = (ReportingStructure) obj;
+        return (
+            reportingStructure.getEmployee().getEmployeeId().equalsIgnoreCase(this.employee.getEmployeeId()) &&
+            reportingStructure.getNoOfReports() == this.noOfReports
+        );
     }
 }

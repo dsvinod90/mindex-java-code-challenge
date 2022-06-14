@@ -86,15 +86,7 @@ public class ReportingStructureServiceImplTest {
         assertEquals(HttpStatus.OK, res.getStatusCode());
         ReportingStructure reportingStructure = (ReportingStructure)res.getBody();
         assertNotNull(reportingStructure);
-        assertEquals(
-            testReportingStructure.getEmployee().getEmployeeId(),
-            reportingStructure.getEmployee().getEmployeeId()
-            
-        );
-        assertEquals(
-            testReportingStructure.getNoOfReports(),
-            reportingStructure.getNoOfReports()
-        );
+        assertEquals(testReportingStructure, reportingStructure);
     }
 
     // Test to read reporting structure after creating new employee 
@@ -109,13 +101,6 @@ public class ReportingStructureServiceImplTest {
         assertEquals(HttpStatus.OK, res.getStatusCode());
         ReportingStructure reportingStructure = (ReportingStructure)res.getBody();
         assertNotNull(reportingStructure);
-        assertEquals(
-            testReportingStructure.getEmployee().getEmployeeId(),
-            reportingStructure.getEmployee().getEmployeeId()
-        );
-        assertEquals(
-            testReportingStructure.getNoOfReports(),
-            reportingStructure.getNoOfReports()
-        );
+        assertEquals(testReportingStructure, reportingStructure);
     }
 }

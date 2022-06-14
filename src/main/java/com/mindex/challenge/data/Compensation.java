@@ -15,11 +15,9 @@ public class Compensation {
     
     private Employee employee;
     private int salary;
+    private String effectiveDate;
 
-    @JsonFormat(pattern="yyyy-MM-dd")
-    private Date effectiveDate;
-
-    public Compensation(Employee employee, int salary, Date effectiveDate) {
+    public Compensation(Employee employee, int salary, String effectiveDate) {
         this.employee = employee;
         this.salary = salary;
         this.effectiveDate = effectiveDate;
@@ -45,12 +43,25 @@ public class Compensation {
         this.salary = salary;
     }
 
-    public Date getEffectiveDate() {
+    public String getEffectiveDate() {
         return this.effectiveDate;
     }
 
-    public void setEffectiveDate(Date effectiveDate) {
+    public void setEffectiveDate(String effectiveDate) {
         this.effectiveDate = effectiveDate;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) return true;
+        if (!(obj instanceof Compensation)) return false;
+        Compensation compensation = (Compensation) obj;
+        System.out.println("Passed: " + compensation.getEffectiveDate());
+        System.out.println("This: " + this.getEffectiveDate());
+        return (
+            compensation.getEmployee().getEmployeeId().equalsIgnoreCase(this.employee.getEmployeeId()) &&
+            compensation.getSalary() == this.salary &&
+            compensation.getEffectiveDate().equals(this.effectiveDate)
+        );
+    }
 }

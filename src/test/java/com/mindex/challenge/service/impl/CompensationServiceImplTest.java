@@ -50,10 +50,6 @@ public class CompensationServiceImplTest {
     public void setup() throws ParseException {
         readUrl = "http://localhost:" + port + "/compensation/{employeeId}";
         createUrl = "http://localhost:" + port + "/compensation"; 
-        String date_string = "2022-10-10";
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        date = formatter.parse(date_string);
-
         testEmployee = employeeRepository.findByEmployeeId(
             "16a596ae-edd3-4847-99fe-c4518e82c86f"
         );
@@ -62,7 +58,7 @@ public class CompensationServiceImplTest {
     // Test for create endpoint
     @Test
     public void testCreateCompensation() {
-        Compensation testCompensation = new Compensation(testEmployee, 10000, date);
+        Compensation testCompensation = new Compensation(testEmployee, 10000, "2022-10-10");
         ResponseEntity res = restTemplate.postForEntity(
             createUrl,
             testCompensation,
@@ -71,21 +67,22 @@ public class CompensationServiceImplTest {
         assertEquals(HttpStatus.OK, res.getStatusCode());
         Compensation responseCompensation = (Compensation)res.getBody();
         assertNotNull(responseCompensation);
-        assertEquals(
-            testEmployee.getEmployeeId(),
-            responseCompensation.getEmployee().getEmployeeId()
-        );
-        assertEquals(
-            testCompensation.getSalary(),
-            responseCompensation.getSalary()
-        );
+        assertEquals(testCompensation, responseCompensation);
+        // assertEquals(
+        //     testEmployee.getEmployeeId(),
+        //     responseCompensation.getEmployee().getEmployeeId()
+        // );
+        // assertEquals(
+        //     testCompensation.getSalary(),
+        //     responseCompensation.getSalary()
+        // );
     }
 
     // Test for read endpoint
     @Test
     public void testReadCompensation() {
         testEmployeeOne = employeeRepository.findByEmployeeId("b7839309-3348-463b-a7e3-5de1c168beb3");
-        testCompensationOne = new Compensation(testEmployeeOne, 5000, date);
+        testCompensationOne = new Compensation(testEmployeeOne, 5000, "2022-10-05");
         compensationService.create(testCompensationOne);
         
         ResponseEntity res = restTemplate.getForEntity(
